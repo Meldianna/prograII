@@ -15,6 +15,7 @@ public interface INodo<T> {
 	void agregarVecino(INodo<T> vecino, int peso);
 
 	Map<INodo<T>, Integer> getVecinos();
+
 }
 
 

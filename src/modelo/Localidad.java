@@ -3,7 +3,7 @@ package modelo;
 import interfaces.ILocalidad;
 
 public class Localidad implements ILocalidad{
-	private String provincia; //cambiamos el DNI a tipo entero
+	private String provincia;
     private String nombre;
     private int codigoPostal;
  

@@ -55,13 +55,9 @@ public class Nodo<T> implements INodo<T> {
         this.peso = peso;
     }
 
-    // IMPORTANTE: para que los nodos se comparen correctamente en colecciones (Map, Set)
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Nodo)) return false;
-        Nodo<?> otro = (Nodo<?>) obj;
-        return Objects.equals(this.nombreLocalidad, otro.nombreLocalidad);
+        return this == obj;
     }
 
     @Override
