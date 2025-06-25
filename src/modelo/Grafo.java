@@ -31,43 +31,15 @@ public class Grafo<T> implements IGrafo<T> {
         }
     }
 
-    // Implementación del algoritmo de Dijkstra para rutas mínimas desde idOrigen
-    public Map<INodo<T>, Integer> dijkstra(int idOrigen) {
-        Map<INodo<T>, Integer> distancias = new HashMap<>();
-        Set<INodo<T>> visitados = new HashSet<>();
-
-        INodo<T> origen = nodos.get(idOrigen);
-        if (origen == null) return distancias;
-
-        // Inicializar distancias a infinito excepto origen
-        for (INodo<T> nodo : nodos.values()) {
-            distancias.put(nodo, Integer.MAX_VALUE);
-        }
-        distancias.put(origen, 0);
-
-        // PriorityQueue ordenada por la distancia mínima actual
-        PriorityQueue<INodo<T>> cola = new PriorityQueue<>(Comparator.comparingInt(distancias::get));
-        cola.add(origen);
-
-        while (!cola.isEmpty()) {
-            INodo<T> actual = cola.poll();
-            if (visitados.contains(actual)) continue;
-            visitados.add(actual);
-
-            // Revisar vecinos y actualizar distancias
-            for (Map.Entry<INodo<T>, Integer> entrada : actual.getVecinos().entrySet()) {
-                INodo<T> vecino = entrada.getKey();
-                int pesoArista = entrada.getValue();
-
-                int nuevaDistancia = distancias.get(actual) + pesoArista;
-                if (nuevaDistancia < distancias.get(vecino)) {
-                    distancias.put(vecino, nuevaDistancia);
-                    cola.add(vecino);
-                }
-            }
-        }
-        return distancias;
+    @Override
+    public Collection<INodo<T>> getTodosLosNodos() {
+        return nodos.values();
     }
+
+    public INodo<T> buscarNodoPorId(int id) {
+        return nodos.get(id);
+    }
+
 
     @Override
     public void mostrarMatrizAdyacencia() {
@@ -159,5 +131,6 @@ public class Grafo<T> implements IGrafo<T> {
             dfsRecursivo(vecino.getKey(), visitados);
         }
     }
+
 }
 
