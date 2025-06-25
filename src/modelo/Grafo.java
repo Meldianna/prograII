@@ -6,6 +6,7 @@ import interfaces.INodo;
 //grafo NO dirigido
 public class Grafo<T> implements IGrafo<T>{
 
+    
     private Map<Integer, INodo<T>> nodos = new HashMap<>();//el grafo tiene
 
     @Override
