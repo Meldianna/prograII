@@ -6,7 +6,6 @@ public interface INodo<T> {
 
 	//PRE: El nodo debe tener asignado un valor de tipo genérico
 	//POST: Retorna el valor, independientemente si se trata de un tipo de dato u objeto
-	//AX: if valor == null -> error
 	T getValor();
 
 	//PRE: El nodo debe tener un atributo llamado valor
