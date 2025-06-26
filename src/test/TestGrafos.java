@@ -46,11 +46,10 @@ public class TestGrafos {
 
 
         // EJECUCIÓN DEL ALGORITMO DE DIJKSTRA
-        // Calculamos y mostramos la ruta más corta desde "Retiro" (ID 1).
+
         System.out.println("\n--- Calculando rutas desde Retiro (ID 1) ---");
         Dijkstra.ejecutar(grafo, 1);
 
-        // Podemos volver a llamar al método para calcular desde otro origen.
         System.out.println("\n--- Calculando rutas desde Constitución (ID 2) ---");
         Dijkstra.ejecutar(grafo, 2);
 
