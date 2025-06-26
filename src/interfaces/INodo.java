@@ -1,25 +1,20 @@
 package interfaces;
 
-import java.util.Set;
+import java.util.Map;
 
 public interface INodo<T> {
 
-	/*
-	 PRE: -
-	 POST: Lista creada y asociada a cada instancia de interfaces.INodo
-	 AX: - 
-	 */
-	//List<INodo<T>> getVecinos(); //constante
-	public String getNombre();
-	/*getters & setters*/
-	T getValor(); //valor de tipo genérico
+	String getNombre();
+
+	T getValor();
 	void setValor(T valor);
+
 	int getPeso();
 	void setPeso(int peso);
-	
 
-	void agregarVecino(INodo<T> vecino);
-	Set getVecinos();
-	//void agregarVecino(String nombre, int peso);
+	void agregarVecino(INodo<T> vecino, int peso);
+
+	Map<INodo<T>, Integer> getVecinos();
+
 }
 

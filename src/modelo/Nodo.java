@@ -1,63 +1,50 @@
 package modelo;
-import interfaces.INodo;
-import java.util.*;
 
-public class Nodo<T> implements INodo<T>{
-	
-    private String nombreLocalidad; //agregamos que el nodo sepa cuál es su ID --> hace más sencillo la lógica de los metodos del grafo. :)
-    private T valor;
-    private int peso;
-    private Map<String, Integer> vecinos; //en un grafo, cada nodo tiene una lista de sus nodos adyacentes. La clave que identifica
-    //a cada nodo es el nombre de la Localidad, y como valor asociado es el peso (esfuerzo que conlleva ir al nodo, simulando peso de la arista)
+import java.util.Map; // MODIFICADO: Importamos Map en lugar de List
+import java.util.HashMap; // MODIFICADO: Añadido para la nueva estructura
+import java.util.Objects; // MODIFICADO: Añadido para implementar equals/hashCode de forma segura
 
-    public Nodo(String nombre, T valor, int peso){
-        this.valor = valor;
-        this.nombreLocalidad= nombre;
-        this.peso = peso;
-        this.vecinos = new HashMap<>(); //inicializamos el array
-    }
-    @Override
-    public Set<Map.Entry<String, Integer>> getVecinos() {
-        return vecinos.entrySet(); //retorna un Set con todos los vecinos en pares clave-valor
-    }
+public class Nodo<T> { // MODIFICADO: Clase ahora genérica con <T>
 
-    public void agregarVecino(String nombre, int peso) {
-            vecinos.putIfAbsent(nombre, peso);
-    }
-    
-    
-    //implementar un try-catch para no permitir nulos. Por defecto, HashMap permite claves de valor null, pero 
-    //no es nuestro caso
-	@Override
-	public void agregarVecino(INodo<T> vecino) {
-		try {
-		vecinos.putIfAbsent(vecino.getNombre(), vecino.getPeso());
-		}
-	
-	
-    
-    public String getNombre() {
-        return nombreLocalidad;
-    }
+    private T valor; // MODIFICADO: El valor es de tipo genérico T
 
-    @Override
-    public T getValor() {
-        return null;
-    }
+    // MODIFICADO: Reemplazamos las dos Listas por un único Map.
+    // La clave es el Nodo vecino y el valor es el peso de la arista.
+    private Map<Nodo<T>, Integer> adyacencias = new HashMap<>();
 
-    @Override
-    public void setValor(T valor) {
+    public Nodo(T valor) { // MODIFICADO: El constructor acepta un valor de tipo T
         this.valor = valor;
     }
-    @Override
-    public int getPeso() {
-	return this.peso;
-    }
-    @Override
-    public void setPeso(int peso) {
-	this.peso = peso;
+
+    public T getValor() { // MODIFICADO: Devuelve un valor de tipo T
+        return valor;
     }
 
-   
-	
+    // MODIFICADO: El método ahora es más simple y seguro.
+    public void agregarVecino(Nodo<T> vecino, int peso) {
+        adyacencias.put(vecino, peso);
+    }
+
+    // MODIFICADO: Nuevo método para obtener el mapa de adyacencias.
+    // Es la forma más eficiente para que Dijkstra itere sobre los vecinos.
+    public Map<Nodo<T>, Integer> getAdyacencias() {
+        return adyacencias;
+    }
+
+    // --- MÉTODOS AÑADIDOS PARA EL CORRECTO FUNCIONAMIENTO COMO CLAVE DE MAPA ---
+
+    @Override // AÑADIDO: Sobrescritura del método hashCode.
+    public int hashCode() {
+        // Es crucial para que los HashMaps funcionen correctamente con Nodo como clave.
+        return Objects.hash(valor);
+    }
+
+    @Override // AÑADIDO: Sobrescritura del método equals.
+    public boolean equals(Object obj) {
+        // Define que dos Nodos son "iguales" si sus valores internos son iguales.
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Nodo<?> otroNodo = (Nodo<?>) obj;
+        return Objects.equals(valor, otroNodo.valor);
+    }
 }
