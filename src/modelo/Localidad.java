@@ -3,21 +3,20 @@ package modelo;
 import interfaces.ILocalidad;
 
 public class Localidad implements ILocalidad{
-	private String provincia; //cambiamos el DNI a tipo entero
+	private String provincia;
     private String nombre;
-    private int codigoPostal;
+    
  
-    public Localidad(int numero, String nombre, String provincia) {
-        this.codigoPostal = numero;
+    public Localidad( String nombre, String provincia) {
+        
         this.nombre = nombre;
         this.provincia = provincia;
     }
+    
+    
+    
 
-
-	@Override
-	public int getCodigoPostal() {
-		return this.codigoPostal;
-	}
+	
 
 	@Override
 	public String getNombre() {
@@ -28,4 +27,10 @@ public class Localidad implements ILocalidad{
 	public String getProvincia() {
 		return this.provincia;
 	}
+
+	@Override
+	public String toString() {
+		return nombre + " (" + provincia ;
+	}
+
 }
