@@ -6,20 +6,6 @@ import java.util.*;
 
 public class Dijkstra<T> {
 
-    // El constructor y la variable de instancia se eliminan porque ahora usaremos métodos estáticos.
-    /*
-    private IGrafo<T> grafo;
-    public Dijkstra(IGrafo<T> grafo) {
-        this.grafo = grafo;
-    }
-    */
-
-    /**
-     * MÉTODO ESTÁTICO PRINCIPAL.
-     * Encapsula la lógica para ejecutar el algoritmo de Dijkstra y mostrar los resultados.
-     * @param grafo El grafo sobre el cual se ejecutará el algoritmo.
-     * @param idOrigen El ID del nodo de inicio.
-     */
     public static <T> void ejecutar(IGrafo<T> grafo, int idOrigen) {
 
         // 1. Buscamos el nodo de origen.
@@ -54,8 +40,7 @@ public class Dijkstra<T> {
     }
 
     /**
-     * TU MÉTODO ORIGINAL 'calcularDistancias', ahora como un método de ayuda privado y estático.
-     * La lógica interna es EXACTAMENTE la misma.
+     método de ayuda privado y estático.
      */
     private static <T> Map<INodo<T>, Integer> calcularDistancias(IGrafo<T> grafo, INodo<T> origen, Map<INodo<T>, INodo<T>> padres) {
         Map<INodo<T>, Integer> distancias = new HashMap<>();
@@ -90,8 +75,7 @@ public class Dijkstra<T> {
     }
 
     /**
-     * TU MÉTODO ORIGINAL 'reconstruirCamino', ahora como un método de ayuda privado y estático.
-     * La lógica interna es EXACTAMENTE la misma.
+     método de ayuda privado y estático.
      */
     private static <T> List<INodo<T>> reconstruirCamino(INodo<T> destino, Map<INodo<T>, INodo<T>> padres) {
         List<INodo<T>> camino = new ArrayList<>();
