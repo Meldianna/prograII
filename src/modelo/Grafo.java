@@ -1,50 +1,51 @@
 package modelo;
 
+import java.util.*;
+import interfaces.IGrafo;
+import interfaces.INodo;
 
-import java.util.Collection; // MODIFICADO: Añadido para el tipo de retorno de getNodos
-import java.util.HashMap;
-import java.util.Map;
-// Se eliminan las importaciones de List e INodo que ya no se usan directamente aquí.
+// Grafo NO dirigido con pesos en aristas y algoritmo Dijkstra
+public class Grafo<T> implements IGrafo<T> {
+    @Override
+    public void agregarArista(int origen, int destino) {
 
-public class Grafo<T> { // MODIFICADO: Clase ahora genérica con <T>
-
-    // MODIFICADO: El mapa ahora asocia un valor T con su correspondiente Nodo<T>.
-    private Map<T, Nodo<T>> nodos = new HashMap<>();
-
-    // MODIFICADO: El método acepta un valor de tipo T.
-    public void agregarNodo(T valor) {
-        nodos.putIfAbsent(valor, new Nodo<>(valor));
     }
 
-    // MODIFICADO: Los parámetros ahora son de tipo T para identificar los nodos.
-    public void agregarArista(T origen, T destino, int peso) {
-        Nodo<T> nodoOrigen = nodos.get(origen); // MODIFICADO: Búsqueda por valor T
-        Nodo<T> nodoDestino = nodos.get(destino); // MODIFICADO: Búsqueda por valor T
+    private Map<Integer, INodo<T>> nodos = new HashMap<>();
+
+    private Set<String> nombreContenidos= new HashSet<>();
+
+    @Override
+    public void agregarNodo(int id, T valor, String nombreContenido) {// id sería la clave del "diccionario"; valor sería el valor asociado a esa clave,
+        //en este caso, "valor" sería un objeto llamado persona. Entonces el Nodo sería una persona.
+        if (!nodos.containsKey(id) && (!nombreContenidos.contains(nombreContenido))){//si la clave "id" se encuentra NO dentro del mapa
+            nodos.put(id, new Nodo<T>(valor));//agregamos al mapa la clave "id" y su nuevo valor (un INodo de tipo <T>)
+            nombreContenidos.add(nombreContenido);
+
+        }
+
+    }
+
+    // Agregar arista con peso entre nodos existentes
+    public void agregarArista(int idOrigen, int idDestino, int peso) {
+        INodo<T> nodoOrigen = nodos.get(idOrigen);
+        INodo<T> nodoDestino = nodos.get(idDestino);
         if (nodoOrigen != null && nodoDestino != null) {
             nodoOrigen.agregarVecino(nodoDestino, peso);
-            nodoDestino.agregarVecino(nodoOrigen, peso); // Si es no dirigido
+            nodoDestino.agregarVecino(nodoOrigen, peso); // Grafo no dirigido
         }
     }
 
-    // MODIFICADO: Adaptado al nuevo mapa de adyacencias del Nodo.
-    public void mostrarListaAdyacencia() {
-        for (Nodo<T> nodo : nodos.values()) { // MODIFICADO: Itera sobre Nodo<T>
-            System.out.print(nodo.getValor() + ": ");
-            // MODIFICADO: Itera sobre el Map.Entry para obtener vecino y peso juntos.
-            for (Map.Entry<Nodo<T>, Integer> adyacencia : nodo.getAdyacencias().entrySet()) {
-                System.out.print("(" + adyacencia.getKey().getValor() + ", peso=" + adyacencia.getValue() + ") ");
-            }
-            System.out.println();
-        }
-    }
 
-    // MODIFICADO: Acepta un valor T y devuelve un Nodo<T>.
-    public Nodo<T> getNodo(T valor) {
-        return nodos.get(valor);
-    }
-
-    // MODIFICADO: Devuelve una colección de los nuevos objetos Nodo<T>.
-    public Collection<Nodo<T>> getNodos() {
+    public Collection<INodo<T>> getTodosLosNodos() {
         return nodos.values();
     }
+
+
+
+    public INodo<T> buscarNodoPorId(int id) {
+        return nodos.get(id);
+    }
+
+
 }

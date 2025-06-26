@@ -5,18 +5,12 @@ import interfaces.ILocalidad;
 public class Localidad implements ILocalidad{
 	private String provincia;
 	private String nombre;
-	private int codigoPostal;
 
-	public Localidad(int numero, String nombre, String provincia) {
-		this.codigoPostal = numero;
+
+	public Localidad( String nombre, String provincia) {
+
 		this.nombre = nombre;
 		this.provincia = provincia;
-	}
-
-
-	@Override
-	public int getCodigoPostal() {
-		return this.codigoPostal;
 	}
 
 	@Override
@@ -31,7 +25,7 @@ public class Localidad implements ILocalidad{
 
 	@Override
 	public String toString() {
-		return nombre + " (" + provincia + ", CP: " + codigoPostal + ")";
+		return nombre + " (" + provincia ;
 	}
 
 }
