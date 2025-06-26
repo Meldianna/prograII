@@ -45,26 +45,14 @@ public class TestGrafos {
 
 
 
-        // Ejecutar Dijkstra desde Palermo (id = 1)
-        INodo<Localidad> origen = grafo.buscarNodoPorId(1);
-        Map<INodo<Localidad>, INodo<Localidad>> padres = new HashMap<>();
-        Dijkstra<Localidad> solver = new Dijkstra<>(grafo);
-        Map<INodo<Localidad>, Integer> distancias = solver.calcularDistancias(origen, padres);
+        // EJECUCIÓN DEL ALGORITMO DE DIJKSTRA
+        // Calculamos y mostramos la ruta más corta desde "Retiro" (ID 1).
+        System.out.println("\n--- Calculando rutas desde Retiro (ID 1) ---");
+        Dijkstra.ejecutar(grafo, 1);
 
-        // Mostrar distancias y caminos
-        System.out.println("\n== Dijkstra desde Palermo ==");
-        for (Map.Entry<INodo<Localidad>, Integer> entrada : distancias.entrySet()) {
-            Localidad destino = entrada.getKey().getValor();
-            int distancia = entrada.getValue();
-            System.out.print("Distancia hasta " + destino.getNombre() + ": " + distancia);
-
-            List<INodo<Localidad>> camino = solver.reconstruirCamino(entrada.getKey(), padres);
-            System.out.print(" | Camino: ");
-            for (INodo<Localidad> paso : camino) {
-                System.out.print(paso.getValor().getNombre() + " ");
-            }
-            System.out.println();
-        }
+        // Podemos volver a llamar al método para calcular desde otro origen.
+        System.out.println("\n--- Calculando rutas desde Constitución (ID 2) ---");
+        Dijkstra.ejecutar(grafo, 2);
 
 
     }

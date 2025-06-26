@@ -23,9 +23,9 @@ public class Localidad implements ILocalidad{
 		return this.provincia;
 	}
 
-	@Override
 	public String toString() {
-		return nombre + " (" + provincia ;
+
+		return this.nombre;
 	}
 
 }

@@ -21,4 +21,5 @@ public interface IGrafo<T> {
     //pre:  el mapa de nodos no debe estar vacío
     //post: retorna una colección de todos los nodos del mapa
     public Collection<INodo<T>> getTodosLosNodos();
+    public INodo<T> buscarNodoPorId(int id);
 }

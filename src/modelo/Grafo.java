@@ -41,8 +41,6 @@ public class Grafo<T> implements IGrafo<T> {
         return nodos.values();
     }
 
-
-
     public INodo<T> buscarNodoPorId(int id) {
         return nodos.get(id);
     }

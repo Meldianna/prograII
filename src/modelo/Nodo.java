@@ -6,18 +6,16 @@ import java.util.*;
 public class Nodo<T> implements INodo<T> {
 
 
-
     private T valor;                 // Información que guarda el nodo (por ej. Localidad)
 
     // Vecinos con peso: clave = vecino (nodo), valor = peso de la arista que conecta
     private Map<INodo<T>, Integer> vecinos;
 
-    public Nodo( T valor) {
+    public Nodo(T valor) {
         this.valor = valor;
 
         this.vecinos = new HashMap<>();
     }
-
 
 
     // Agrega vecino y su peso solo si no existe ya
@@ -43,6 +41,10 @@ public class Nodo<T> implements INodo<T> {
         this.valor = valor;
     }
 
+    public String toString() {
+        // Llama al método toString() del objeto 'valor' que contiene.
+        return String.valueOf(this.valor);
+    }
 
 
 }
